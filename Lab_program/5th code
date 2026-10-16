@@ -1,0 +1,31 @@
+import heapq
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+h = {'A': 5, 'B': 3, 'C': 4,
+     'D': 2, 'E': 1, 'F': 0}
+def greedy(start, goal):
+    queue = [(h[start], start, [start])]
+    visited = set()
+    while queue:
+        _, node, path = heapq.heappop(queue)
+        if node == goal:
+            print("Path:", path)
+            return
+        if node not in visited:
+            visited.add(node)
+            for n in graph[node]:
+                if n not in visited:
+                    heapq.heappush(
+                        queue, (h[n], n, path + [n])
+                    )
+greedy('A', 'F')
+#output
+Path: ['A', 'B', 'E', 'F']
+
+
