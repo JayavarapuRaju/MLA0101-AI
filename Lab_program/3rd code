@@ -1,0 +1,29 @@
+import heapq
+graph={
+    'A': [('B', 1), ('C', 4)],
+    'B': [('D', 2), ('E', 5)],
+    'C': [('F', 3)],
+    'D': [],
+    'E': [('F', 1)],
+    'F': []
+}
+def ucs(start,goal):
+    queue=[(0,start,[start])]
+    while queue:
+        cost,node,path=heapq.heappop(queue)
+        if node==goal:
+            print("path:",path)
+            print("cost",cost)
+            return
+        for n,w in graph[node]:
+            if n not in path:
+                heapq.heappush(
+                       queue, (cost + w, n, path + [n])
+                )
+
+ucs('A', 'F')
+#output
+path: ['A', 'B', 'E', 'F']
+cost 7
+
+                    
