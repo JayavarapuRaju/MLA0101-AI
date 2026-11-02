@@ -1,0 +1,10 @@
+X = df[['Income', 'Credit_Score', 'Age']]
+y = df['Loan_Approval']
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X, y)
+new_customer = [[55000, 680, 32]]
+prediction = model.predict(new_customer)
+if prediction[0] == 1:
+    print("Loan Approved")
+else:
+    print("Loan Rejected")
